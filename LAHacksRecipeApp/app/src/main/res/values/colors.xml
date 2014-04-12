@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="recipeTitleListItem">#FFFFFF</color>
+    <color name="recipeListItemBg">#777777</color>
+
+</resources>
