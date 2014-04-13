@@ -140,8 +140,10 @@ public class RecipeActivity extends Activity {
                 public void run() {
                     RecipeActivity.this.ingredients.setText(ingredientsStr);
                     RecipeActivity.this.directions.setText(directions);
-                    RecipeActivity.this.time.setText(time);
-                    RecipeActivity.this.yield.setText("Serves " + yield);
+                    if (!time.equalsIgnoreCase("null"))
+                      RecipeActivity.this.time.setText(time);
+                    if (!yield.equalsIgnoreCase("null"))
+                        RecipeActivity.this.yield.setText("Serves " + yield);
                 }
             });
 

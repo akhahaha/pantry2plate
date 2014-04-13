@@ -9,7 +9,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Pantry2Plate" >
         <activity
             android:name="com.lahacksrecipeapp.app.MainActivity"
             android:label="@string/app_name"
@@ -21,18 +21,18 @@
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.SelectIngredientsActivity"
-            android:label="Select Ingredients"
+            android:label="  Select Ingredients!"
             android:parentActivityName="com.lahacksrecipeapp.app.MainActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.ShowRecipesActivity"
-            android:label="Possible Recipes"
+            android:label="Choose a Recipe!"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.RecipeActivity"
-            android:label="Recipe View"
+            android:label="Your Recipe!"
             android:screenOrientation="portrait">
         </activity>
     </application>

@@ -73,7 +73,6 @@ public class SelectIngredientsActivity extends Activity {
                 final EditText input = new EditText(SelectIngredientsActivity.this);
                 input.setText(items.get(pos));
                 alert.setView(input);
-                alert.setMessage("Delete entry to remove ingredient.");
 
                 alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -92,7 +91,16 @@ public class SelectIngredientsActivity extends Activity {
                         adapter.notifyDataSetChanged();
                     }
                 });
-
+                alert.setNeutralButton("Delete",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                db.deleteItem(items.get(pos));
+                                adapter.clear();
+                                items = db.getAllItemNames();
+                                adapter.addAll(items);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // canceled
