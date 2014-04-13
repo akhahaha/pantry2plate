@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
     @Override
@@ -14,20 +15,15 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView cover = (ImageView) findViewById(R.id.coverart);
+        cover.setImageResource(R.drawable.coverart);
+        cover.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
         Button selectIngredientsButton = (Button) findViewById(R.id.selectIngredientsButton);
         selectIngredientsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
                 Intent i = new Intent(MainActivity.this, SelectIngredientsActivity.class);
-                startActivity(i);
-            }
-        });
-
-        Button showRecipesButton = (Button) findViewById(R.id.showRecipesButton);
-        showRecipesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ShowRecipesActivity.class);
                 startActivity(i);
             }
         });

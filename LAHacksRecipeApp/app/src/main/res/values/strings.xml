@@ -7,5 +7,6 @@
     <string name="action_add_ingredient">Add Ingredient</string>
     <string name="ingredients_header">Ingredients</string>
     <string name="directions_header">Directions</string>
+    <string name="yummly_attr">Powered by Yummly</string>
 
 </resources>

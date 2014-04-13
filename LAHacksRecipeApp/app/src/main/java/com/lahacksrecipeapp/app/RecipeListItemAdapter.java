@@ -160,7 +160,9 @@ public class RecipeListItemAdapter extends BaseAdapter {
         if (type == 1) {
             ((TextView) convertView.findViewById(R.id.separator_list_item)).setText(this.recipeListItems.get(position).getCategory());
         } else {
-            ((ImageView) convertView.findViewById(R.id.recipeListItemImage)).setImageBitmap(this.recipeListItems.get(position).getImage());
+            ImageView img = (ImageView) convertView.findViewById(R.id.recipeListItemImage);
+            img.setImageBitmap(this.recipeListItems.get(position).getImage());
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             ((TextView) convertView.findViewById(R.id.recipeListItemTitle)).setText(this.recipeListItems.get(position).getTitle());
         }
 

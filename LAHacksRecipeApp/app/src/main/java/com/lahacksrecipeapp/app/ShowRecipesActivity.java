@@ -94,7 +94,8 @@ public class ShowRecipesActivity extends ListActivity{
                         Log.i("RecipeListItem.java", "i: " + i);
                         String url = recipeListItem.getUrl();
                         URL newurl = new URL(url);
-                        recipeListItem.setImage(resizeBitMap(BitmapFactory.decodeStream(newurl.openConnection().getInputStream())));
+                        recipeListItem.setImage(BitmapFactory.decodeStream(newurl.openConnection().getInputStream()));
+                        // recipeListItem.setImage(resizeBitMap(BitmapFactory.decodeStream(newurl.openConnection().getInputStream())));
                         Log.i("RecipeListItem.java", "Bitmap: " + recipeListItem.getImage().toString());
                     }
                 }
