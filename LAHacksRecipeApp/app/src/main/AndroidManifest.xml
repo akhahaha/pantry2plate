@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lahacksrecipeapp.app" >
 
+    <uses-sdk android:minSdkVersion="11"></uses-sdk>;
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -12,19 +15,18 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.SelectIngredientsActivity"
-            android:label="Select Ingredients Activity" >
+            android:label="Select Ingredients"
+            android:parentActivityName="com.lahacksrecipeapp.app.MainActivity" >
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.ShowRecipesActivity"
-            android:label="Show Recipes Activity" >
+            android:label="Possible Recipes" >
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>
