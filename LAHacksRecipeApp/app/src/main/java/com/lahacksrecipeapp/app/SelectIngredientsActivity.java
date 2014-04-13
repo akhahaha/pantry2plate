@@ -31,11 +31,13 @@ public class SelectIngredientsActivity extends ActionBarActivity {
 
         // initialize ingredients list
         items = new ArrayList<String>();
+
+        // TODO: Remove diagnostic entries, add placeholder entry ("Click to add item...")
         items.add("Eggs");
         items.add("Flour");
         items.add("Chocolate");
         for (int i = 0; i < 20; i++)
-            items.add("test"+i);
+            items.add("Steak "+i);
 
         // initialize adapter with array
         adapter = new ArrayAdapter<String>
@@ -60,16 +62,21 @@ public class SelectIngredientsActivity extends ActionBarActivity {
                 final EditText input = new EditText(SelectIngredientsActivity.this);
                 input.setText(items.get(pos));
                 alert.setView(input);
+                alert.setMessage("Delete entry to remove ingredient.");
 
                 alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        items.set(pos, input.getText().toString());
+                        // check for empty/whitespace string
+                        if (input.getText().toString().trim().length() == 0)
+                            items.remove(pos);
+                        else
+                            items.set(pos, input.getText().toString());
                     }
                 });
 
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
+                        // canceled
                     }
                 });
 
@@ -83,6 +90,19 @@ public class SelectIngredientsActivity extends ActionBarActivity {
         showRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // generate API call
+                String app_id = "e06bf811";
+                String app_key = "c845f81875e19e9ff3b97e1ec196d18e";
+                String base = "http://api.yummly.com/v1/api/recipes?";
+                String auth = "_app_id=" + app_id + "&_app_key=" + app_key;
+
+                String allowed = "";
+                for (int i = 0; i < items.size(); i++) {
+                    allowed += "&allowedIngredient[]=" + items.get(i);
+                }
+
+                String api_call = base + auth + allowed;
+
                 Intent i = new Intent(SelectIngredientsActivity.this, ShowRecipesActivity.class);
                 startActivity(i);
             }
@@ -113,13 +133,15 @@ public class SelectIngredientsActivity extends ActionBarActivity {
 
             alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    items.add(input.getText().toString());
+                    // check for empty/whitespace string
+                    if (input.getText().toString().trim().length() > 0)
+                        items.add(input.getText().toString());
                 }
             });
 
             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    // Canceled.
+                    // canceled
                 }
             });
 
