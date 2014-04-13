@@ -9,3 +9,9 @@ Pantry 2 Plate
 Summary
 ---------------
 Provides recipe suggestions based on available ingredients.
+Powered by the Yummly API.
+
+Features
+---------------
+ - Ingredient selections are stored in local database for reuse
+ - Recipes are sorted by meal types

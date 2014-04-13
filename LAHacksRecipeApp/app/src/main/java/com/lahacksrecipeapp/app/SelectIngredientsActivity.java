@@ -105,7 +105,7 @@ public class SelectIngredientsActivity extends Activity {
         });
 
         // Get Recipes button
-        Button showRecipesButton = (Button) findViewById(R.id.showRecipesButton);
+        final Button showRecipesButton = (Button) findViewById(R.id.showRecipesButton);
         showRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +122,7 @@ public class SelectIngredientsActivity extends Activity {
 
                 String api_call = base + auth + allowed;
 
+                // showRecipesButton.setBackgroundColor(0x008000); // green
                 Intent i = new Intent(SelectIngredientsActivity.this, ShowRecipesActivity.class);
                 i.putExtra("api_call", api_call);
                 startActivity(i);
