@@ -32,11 +32,12 @@
         android:shadowRadius="6"
         android:layout_alignParentTop="true"
         android:gravity="right"
-        android:layout_marginLeft="96dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="60dp" />
 
     <TextView
-        android:text="Unlock the\nPossibilities of\nyour Pantry"
+        android:text="Unlock the\npossibilities of\nyour groceries"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#EEEEEE"
         android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
         android:gravity="right"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:layout_marginLeft="140dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="135dp" />
 
     <TextView
