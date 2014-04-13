@@ -8,13 +8,13 @@
     <ImageView
         android:id="@+id/recipeListItemImage"
         android:layout_width="match_parent"
-        android:layout_height="175dp"/>
+        android:layout_height="150dp"/>
     <TextView
         android:id="@+id/recipeListItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kale Chips Bitches!"
-        android:layout_marginTop="-35dp"
+        android:layout_marginTop="-40dp"
         android:paddingRight="10dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
