@@ -88,9 +88,13 @@ public class RecipeListItemAdapter extends BaseAdapter {
                 ingredients.add(tmpIngredients.getString(z));
             }
             Log.i("RecipeListItemAdapter.java", "addRecipeItems - ingredients: " + ingredients);
-            String category = "Meal";
-            if (eachMatch.getJSONObject("attributes").length() > 0)
-                category = (String) eachMatch.getJSONObject("attributes").getJSONArray("course").get(0);
+            String category = "Meals";
+            if (eachMatch.getJSONObject("attributes").length() > 0){
+                try{
+                   if (eachMatch.getJSONObject("attributes").getJSONArray("course") != null)
+                     category = (String) eachMatch.getJSONObject("attributes").getJSONArray("course").get(0);
+                }catch(Exception e){};
+            }
             Log.i("RecipeListItemAdapter.java", "addRecipeItems - category: " + category);
             String description = eachMatch.getString("id");
             Log.i("RecipeListItemAdapter.java", "addRecipeItems - description: " + description);

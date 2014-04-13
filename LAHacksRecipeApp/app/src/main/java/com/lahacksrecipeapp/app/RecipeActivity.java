@@ -3,10 +3,15 @@ package com.lahacksrecipeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +21,9 @@ import java.util.ArrayList;
  */
 public class RecipeActivity extends Activity {
 
+    protected String recipeUrl = "";
+    public TextView directions;
+    public TextView ingredients;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +31,8 @@ public class RecipeActivity extends Activity {
 
         ImageView image = (ImageView) findViewById(R.id.recipeImage);
         TextView title = (TextView) findViewById(R.id.recipeTitle);
-        TextView ingredients = (TextView) findViewById(R.id.ingredients);
-        TextView directions = (TextView) findViewById(R.id.directions);
+        this.ingredients = (TextView) findViewById(R.id.ingredientText);
+        this.directions = (TextView) findViewById(R.id.directionText);
 
         Intent recipeInfo = getIntent();
         if (recipeInfo != null){
@@ -32,7 +40,16 @@ public class RecipeActivity extends Activity {
             if (bmp != null)
                 image.setImageBitmap(bmp);
             title.setText(recipeInfo.getStringExtra("recipeTitle"));
-            ArrayList<String> ingredientsArr = recipeInfo.getStringArrayListExtra("recipeIngredients");
+
+            String recipeId = recipeInfo.getStringExtra("recipeDescription");
+            String app_id = getString(R.string.app_id);
+            String app_key = getString(R.string.app_key);
+            String base = "http://api.yummly.com/v1/api/recipe/" + recipeId +"?";
+            String auth = "_app_id=" + app_id + "&_app_key=" + app_key;
+
+            this.recipeUrl = base + auth;
+            new GetRecipeTask().execute(this.recipeUrl);
+            /*ArrayList<String> ingredientsArr = recipeInfo.getStringArrayListExtra("recipeIngredients");
             String ingredientsStr = "";
             for (int i = 0; i < ingredientsArr.size(); ++i){
                 ingredientsStr += ingredientsArr.get(i) + " \n";
@@ -44,7 +61,70 @@ public class RecipeActivity extends Activity {
             }
             ingredients.setText(ingredientsStr);
             directions.setText(directionsStr);
+            */
         }
+
+    }
+
+    protected void fillFields(String dire, String ingred){
+        this.ingredients.setText(ingred);
+        this.directions.setText(dire);
+        return;
+    }
+
+    protected class GetRecipeTask extends AsyncTask<String, Void, Void> {
+
+        private Exception exception;
+        private JSONObject recipeJSON;
+        protected Void doInBackground(String... urls) {
+            try {
+                ServiceHandler sh = new ServiceHandler();
+                Log.i("CourseProfile", "this is the url hit: " + urls[0]);
+                String jsonStr = sh.makeServiceCall(urls[0], ServiceHandler.GET);
+
+                Log.d("Response: ", "> " + jsonStr);
+
+                if(jsonStr != null) {
+                    try {
+                        recipeJSON = new JSONObject(jsonStr);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.e("ServiceHandler", "Couldn't get any data from the url");
+                }
+                onPostExecute();
+                return null;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        protected void onPostExecute() throws JSONException, IOException {
+            //Log.i("RecipeActivity", "OnPostExecute: json returned" + this.recipeJSON);
+            JSONArray tmpIngredients = this.recipeJSON.getJSONArray("ingredientLines");
+            String ingredients = "";
+            for(int z = 0; z < tmpIngredients.length(); ++z){
+                Log.i("RecipeActivity", "OnPostExecute: z" + tmpIngredients.getString(z));
+                ingredients += "->" + tmpIngredients.getString(z) + "\n";
+            }
+
+            String sourceUrl = this.recipeJSON.getJSONObject("source").getString("sourceRecipeUrl");
+            //Log.i("RecipeActivity", "OnPostExecute: sourceUrl" + sourceUrl);
+
+            String directions = "Check out the preparation instructions at " + sourceUrl + "\n";
+
+            //Log.i("RecipeActivity", "OnPostExecute: directions" + directions);
+            //Log.i("RecipeActivity", "OnPostExecute: ingredients" + ingredients);
+            //RecipeActivity.this.fillFields(directions, ingredients);
+
+            RecipeActivity.this.directions.setText(directions);
+            RecipeActivity.this.ingredients.setText(ingredients);
+
+
+        }
+
 
     }
 }
