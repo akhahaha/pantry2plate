@@ -63,8 +63,6 @@ public class ShowRecipesActivity extends ListActivity{
             Log.i("RecipeListItem.java", "bmp swag");
             ShowRecipesActivity.this.adapter.notifyDataSetChanged();
         }
-
-        protected void
     }
 
 }

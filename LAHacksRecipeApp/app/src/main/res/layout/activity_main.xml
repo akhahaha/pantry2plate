@@ -20,6 +20,12 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/selectIngredientsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Ingredients"></Button>
+
+        <Button
             android:id="@+id/showRecipesButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

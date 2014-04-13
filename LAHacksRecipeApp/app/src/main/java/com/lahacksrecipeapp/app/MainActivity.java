@@ -15,13 +15,21 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button showRecipesButton = (Button) findViewById(R.id.showRecipesButton);
+        Button selectIngredientsButton = (Button) findViewById(R.id.selectIngredientsButton);
+        selectIngredientsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent i = new Intent(MainActivity.this, SelectIngredientsActivity.class);
+                startActivity(i);
+            }
+        });
 
+        Button showRecipesButton = (Button) findViewById(R.id.showRecipesButton);
         showRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent swag = new Intent(MainActivity.this, ShowRecipesActivity.class);
-                startActivity(swag);
+                Intent i = new Intent(MainActivity.this, ShowRecipesActivity.class);
+                startActivity(i);
             }
         });
     }
