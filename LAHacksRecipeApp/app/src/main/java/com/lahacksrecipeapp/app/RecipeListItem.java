@@ -4,12 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * Created by jeremykao on 4/12/14.
  */
-public class RecipeListItem {
+public class RecipeListItem{
     private String url;
     private Bitmap image;
     private String title;
@@ -72,4 +75,5 @@ public class RecipeListItem {
     public ArrayList<String> getInstructions(){
         return this.instructions;
     }
+
 }

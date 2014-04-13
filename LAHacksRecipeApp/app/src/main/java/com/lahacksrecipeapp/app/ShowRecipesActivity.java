@@ -1,6 +1,7 @@
 package com.lahacksrecipeapp.app;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -47,10 +48,19 @@ public class ShowRecipesActivity extends ListActivity{
     }
 
     protected void onListItemClick(ListView lv, View v, int position, long id){
-        String title = ((RecipeListItem)adapter.getItem(position)).getTitle();
-        String category = ((RecipeListItem)adapter.getItem(position)).getCategory();
+        RecipeListItem recipe = ((RecipeListItem)adapter.getItem(position));
+        String title = recipe.getTitle();
+        String category = recipe.getCategory();
         if (title != null){
+            Intent intent = new Intent(ShowRecipesActivity.this, RecipeActivity.class);
+            intent.putExtra("recipeTitle", recipe.getTitle());
+            intent.putExtra("recipeDescription", recipe.getDescription());
+            intent.putExtra("recipeCategory", recipe.getCategory());
+            intent.putExtra("recipeIngredients", recipe.getIngredients());
+            intent.putExtra("recipeDirections", recipe.getInstructions());
+            intent.putExtra("bmp", recipe.getImage());
 
+            startActivity(intent);
         }
         else{
             adapter.expandCategory(category);

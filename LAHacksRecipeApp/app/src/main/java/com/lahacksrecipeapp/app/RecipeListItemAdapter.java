@@ -39,9 +39,9 @@ public class RecipeListItemAdapter extends BaseAdapter {
         swagIngredients.add("flouer");
 
         ArrayList<String> swagInstructions = new ArrayList<String>();
-        swagIngredients.add("1. cook the eggs");
-        swagIngredients.add("2. get the swag");
-        swagIngredients.add("3. toss the flouer");
+        swagInstructions.add("1. cook the eggs");
+        swagInstructions.add("2. get the swag");
+        swagInstructions.add("3. toss the flouer");
 
         RecipeListItem recipe1 = new RecipeListItem("http://vafoodbanks.org/wp-content/uploads/" +
                 "2012/06/fresh_food.jpg", "Fresh Foods", "Meal", "This is a shit ton of fresh foods.",

@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/recipeListItemImage"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="@dimen/sizeOfRecipeListItem"/>
     <TextView
         android:id="@+id/recipeListItemTitle"
         android:layout_width="match_parent"

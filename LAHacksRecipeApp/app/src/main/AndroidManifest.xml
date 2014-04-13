@@ -27,6 +27,10 @@
             android:name="com.lahacksrecipeapp.app.ShowRecipesActivity"
             android:label="Possible Recipes" >
         </activity>
+        <activity
+            android:name="com.lahacksrecipeapp.app.RecipeActivity"
+            android:label="Recipe View">
+        </activity>
     </application>
 
 </manifest>
