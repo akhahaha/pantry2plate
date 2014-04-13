@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.lahacksrecipeapp.app.SelectIngredientsActivity"
+            android:label="Select Ingredients Activity" >
+        </activity>
+        <activity
             android:name="com.lahacksrecipeapp.app.ShowRecipesActivity"
             android:label="Show Recipes Activity" >
         </activity>

@@ -68,6 +68,7 @@ public class ShowRecipesActivity extends ListActivity{
         protected void onPostExecute() {
             ShowRecipesActivity.this.adapter.notifyDataSetChanged();
         }
+<<<<<<< HEAD
 
         private Bitmap resizeBitMap(Bitmap bmp){
             Log.i("RecipeListItem.java", "resizeBitMap start");
@@ -87,6 +88,8 @@ public class ShowRecipesActivity extends ListActivity{
             //cvs.drawBitmap(bmp, null, targetF, null);
             return dest;
         }
+=======
+>>>>>>> 1faeb091d3a03adfb84d6d7815c5af8cd0334ed1
     }
 
 }
