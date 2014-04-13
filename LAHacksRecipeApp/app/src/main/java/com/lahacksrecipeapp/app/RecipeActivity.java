@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class RecipeActivity extends Activity {
     protected String recipeUrl = "";
     public TextView directions;
     public TextView ingredients;
+    public TextView time;
+    public TextView yield;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,8 @@ public class RecipeActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.recipeTitle);
         this.ingredients = (TextView) findViewById(R.id.ingredientText);
         this.directions = (TextView) findViewById(R.id.directionText);
+        this.time = (TextView) findViewById(R.id.time);
+        this.yield = (TextView) findViewById(R.id.yield);
 
         Intent recipeInfo = getIntent();
         if (recipeInfo != null){
@@ -67,8 +73,11 @@ public class RecipeActivity extends Activity {
     }
 
     protected void fillFields(String dire, String ingred){
+        this.ingredients = (TextView) findViewById(R.id.ingredientText);
         this.ingredients.setText(ingred);
-        this.directions.setText(dire);
+
+        //this.directions = (TextView) findViewById(R.id.directionText);
+        //this.directions.setText(dire);
         return;
     }
 
@@ -109,19 +118,32 @@ public class RecipeActivity extends Activity {
                 Log.i("RecipeActivity", "OnPostExecute: z" + tmpIngredients.getString(z));
                 ingredients += "->" + tmpIngredients.getString(z) + "\n";
             }
-
+            final String ingredientsStr = ingredients;
             String sourceUrl = this.recipeJSON.getJSONObject("source").getString("sourceRecipeUrl");
             //Log.i("RecipeActivity", "OnPostExecute: sourceUrl" + sourceUrl);
 
-            String directions = "Check out the preparation instructions at " + sourceUrl + "\n";
+            final String directions = "Check out the preparation instructions at " + sourceUrl + "\n";
+
+            final String yield = this.recipeJSON.getString("numberOfServings");
+            final String time = this.recipeJSON.getString("totalTime");
 
             //Log.i("RecipeActivity", "OnPostExecute: directions" + directions);
             //Log.i("RecipeActivity", "OnPostExecute: ingredients" + ingredients);
             //RecipeActivity.this.fillFields(directions, ingredients);
 
-            RecipeActivity.this.directions.setText(directions);
-            RecipeActivity.this.ingredients.setText(ingredients);
+            //(TextView)(RecipeActivity.this.findViewById(R.id.ingredientText)).setText(ingredients);
+            //RecipeActivity.this.directions.setText(directions);
+            //RecipeActivity.this.fillFields(directions, ingredients);
+            runOnUiThread(new Runnable() {
 
+                @Override
+                public void run() {
+                    RecipeActivity.this.ingredients.setText(ingredientsStr);
+                    RecipeActivity.this.directions.setText(directions);
+                    RecipeActivity.this.time.setText(time);
+                    RecipeActivity.this.yield.setText("Serves " + yield);
+                }
+            });
 
         }
 

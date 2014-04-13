@@ -12,7 +12,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.lahacksrecipeapp.app.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,15 +22,18 @@
         <activity
             android:name="com.lahacksrecipeapp.app.SelectIngredientsActivity"
             android:label="Select Ingredients"
-            android:parentActivityName="com.lahacksrecipeapp.app.MainActivity" >
+            android:parentActivityName="com.lahacksrecipeapp.app.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.ShowRecipesActivity"
-            android:label="Possible Recipes" >
+            android:label="Possible Recipes"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.lahacksrecipeapp.app.RecipeActivity"
-            android:label="Recipe View">
+            android:label="Recipe View"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

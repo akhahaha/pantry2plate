@@ -1,5 +1,6 @@
 package com.lahacksrecipeapp.app;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Alan on 4/12/14.
  */
-public class SelectIngredientsActivity extends ActionBarActivity {
+public class SelectIngredientsActivity extends Activity {
     private ArrayList<String> items;
     private DBHandler db;
     private ArrayAdapter<String> adapter;

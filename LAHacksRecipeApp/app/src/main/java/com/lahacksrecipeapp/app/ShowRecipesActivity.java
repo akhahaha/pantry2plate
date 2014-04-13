@@ -108,7 +108,12 @@ public class ShowRecipesActivity extends ListActivity{
         }
 
         protected void onPostExecute() {
-            ShowRecipesActivity.this.adapter.notifyDataSetChanged();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                   ShowRecipesActivity.this.adapter.notifyDataSetChanged();
+                }
+            });
         }
 
         private Bitmap resizeBitMap(Bitmap bmp){
@@ -160,10 +165,21 @@ public class ShowRecipesActivity extends ListActivity{
         }
 
         protected void onPostExecute() throws JSONException, IOException {
-            ShowRecipesActivity.this.adapter.addRecipeItems(this.recipeJSON);
-            Log.i("ShowRecipesActivity", "log before calling onPostExecute");
-            ShowRecipesActivity.this.onPostExecute();
-            ShowRecipesActivity.this.adapter.notifyDataSetChanged();
+            final JSONObject tmpJson = this.recipeJSON;
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        ShowRecipesActivity.this.adapter.addRecipeItems(tmpJson);
+                    } catch (JSONException e) {
+                    } catch (IOException e) {
+                    }
+                    Log.i("ShowRecipesActivity", "log before calling onPostExecute");
+                    ShowRecipesActivity.this.onPostExecute();
+                    ShowRecipesActivity.this.adapter.notifyDataSetChanged();
+                }
+            });
         }
 
     }
