@@ -14,8 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.regex.Matcher;
@@ -32,7 +38,7 @@ public class RecipeListItemAdapter extends BaseAdapter {
     public RecipeListItemAdapter(Context context, ListView lv) throws IOException {
         this.context = context;
         this.lv = lv;
-        /****** Mock Data *****/
+        /****** Mock Data ****
         ArrayList<String> swagIngredients = new ArrayList<String>();
         swagIngredients.add("1/2lb eggs");
         swagIngredients.add("yolo swag");
@@ -60,6 +66,38 @@ public class RecipeListItemAdapter extends BaseAdapter {
         recipeListItems.add(recipe2);
         recipeListItems.add(recipe3);
 
+         ** End Mock Data *******/
+
+    }
+    public void addRecipeItems(JSONObject jsonResult) throws JSONException, IOException {
+
+        Log.i("RecipeListItemAdapter.java", "addRecipeItems - this is jsonResult: " + jsonResult.toString());
+        JSONArray matches = jsonResult.getJSONArray("matches");
+
+        for(int i = 0; i < matches.length(); ++i){
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - i: " + i);
+            JSONObject eachMatch = matches.getJSONObject(i);
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - eachMatch: " + eachMatch);
+            String imgUrl = ((String)eachMatch.getJSONArray("smallImageUrls").get(0)).replace("=s90","=s300");
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - imgUrl: " + imgUrl);
+            String recipeName = eachMatch.getString("recipeName");
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - recipeName: " + recipeName);
+            ArrayList<String> ingredients = new ArrayList<String>();
+            JSONArray tmpIngredients = eachMatch.getJSONArray("ingredients");
+            for(int z = 0; z < tmpIngredients.length(); ++z){
+                ingredients.add(tmpIngredients.getString(z));
+            }
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - ingredients: " + ingredients);
+            String category = "Meal";
+            if (eachMatch.getJSONObject("attributes").length() > 0)
+                category = (String) eachMatch.getJSONObject("attributes").getJSONArray("course").get(0);
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - category: " + category);
+            String description = eachMatch.getString("id");
+            Log.i("RecipeListItemAdapter.java", "addRecipeItems - description: " + description);
+            RecipeListItem tmpRecipe = new RecipeListItem(imgUrl,recipeName,category,description,ingredients, null);
+            this.recipeListItems.add(tmpRecipe);
+        }
+
         Collections.sort(this.recipeListItems, new Comparator<RecipeListItem>() {
             @Override
             public int compare(RecipeListItem recipeListItem, RecipeListItem recipeListItem2) {
@@ -73,7 +111,8 @@ public class RecipeListItemAdapter extends BaseAdapter {
             }
         }
 
-        /*** End Mock Data *******/
+        Log.i("RecipeListItemAdapter.java", "addRecipeItems - num in recipeListItems: " + this.recipeListItems.size());
+        return;
     }
     public int getCount(){
         return recipeListItems.size();
@@ -104,33 +143,8 @@ public class RecipeListItemAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //LayoutInflater inflater = (LayoutInflater) context
-        //        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View rowView = inflater.inflate(R.layout.recipe_list_item, parent, false);
 
-        //ImageView image = (ImageView) rowView.findViewById(R.id.recipeListItemImage);
-        //TextView title = (TextView) rowView.findViewById(R.id.recipeListItemTitle);
-
-        /*if (this.recipeListItems.get(position).getTitle() == null){
-            Log.i("RecipeListItemAdapter", "position swag: " + (position - this.lv.getFirstVisiblePosition() + 1) );
-            if (this.lv.getChildAt(position - this.lv.getFirstVisiblePosition() + 1) == null)
-                this.lv.getAdapter().getView(position, this.lv.getChildAt(position - this.lv.getFirstVisiblePosition() + 1), this.lv);
-            else{
-                this.lv.getChildAt(position - this.lv.getFirstVisiblePosition() + 1).getLayoutParams().height = 0;
-            }
-            image.setVisibility(View.INVISIBLE);
-            title.setBackgroundColor(Color.WHITE);
-            title.setText(this.recipeListItems.get(position).getCategory());
-        }
-        else{
-            image.setImageBitmap(this.recipeListItems.get(position).getImage());
-            title.setText(this.recipeListItems.get(position).getTitle());
-        }
-
-        //Log.i("RecipeListItemAdapter.java", this.recipeListItems.get(position).getTitle());
-
-        return rowView;*/
-
+        Log.i("RecipeListItemAdapter.java", "getView - getView called");
         final int type = getItemViewType(position);
 
         // First, let's create a new convertView if needed. You can also

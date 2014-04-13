@@ -35,9 +35,9 @@ public class SelectIngredientsActivity extends ActionBarActivity {
         // TODO: Remove diagnostic entries, add placeholder entry ("Click to add item...")
         items.add("Eggs");
         items.add("Flour");
-        items.add("Chocolate");
-        for (int i = 0; i < 20; i++)
-            items.add("Steak "+i);
+        //items.add("Chocolate");
+        /*for (int i = 0; i < 20; i++)
+            items.add("Steak "+i);*/
 
         // initialize adapter with array
         adapter = new ArrayAdapter<String>
@@ -98,12 +98,13 @@ public class SelectIngredientsActivity extends ActionBarActivity {
 
                 String allowed = "";
                 for (int i = 0; i < items.size(); i++) {
-                    allowed += "&allowedIngredient[]=" + items.get(i);
+                    allowed += "&allowedIngredient[]=" + items.get(i).toLowerCase();
                 }
 
                 String api_call = base + auth + allowed;
 
                 Intent i = new Intent(SelectIngredientsActivity.this, ShowRecipesActivity.class);
+                i.putExtra("api_call", api_call);
                 startActivity(i);
             }
         });
