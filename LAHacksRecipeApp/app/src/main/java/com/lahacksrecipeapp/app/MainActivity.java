@@ -19,10 +19,11 @@ public class MainActivity extends ActionBarActivity {
         cover.setImageResource(R.drawable.coverart);
         cover.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        Button selectIngredientsButton = (Button) findViewById(R.id.selectIngredientsButton);
+        final Button selectIngredientsButton = (Button) findViewById(R.id.selectIngredientsButton);
         selectIngredientsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
+                // selectIngredientsButton.setBackgroundColor(0x008000); // green
                 Intent i = new Intent(MainActivity.this, SelectIngredientsActivity.class);
                 startActivity(i);
             }
