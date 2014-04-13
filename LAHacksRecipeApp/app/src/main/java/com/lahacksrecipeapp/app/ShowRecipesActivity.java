@@ -9,7 +9,11 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,10 +30,9 @@ public class ShowRecipesActivity extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_recipes);
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
+
         try {
-            adapter = new RecipeListItemAdapter(this.getApplicationContext());
+            adapter = new RecipeListItemAdapter(this.getApplicationContext(), this.getListView());
 
             //if (((RecipeListItem)adapter.getItem(0)).getImage() == null){
               new RetreiveBitmapTask().execute("swag");
@@ -43,6 +46,18 @@ public class ShowRecipesActivity extends ListActivity{
         setListAdapter(adapter);
     }
 
+    protected void onListItemClick(ListView lv, View v, int position, long id){
+        String title = ((RecipeListItem)adapter.getItem(position)).getTitle();
+        String category = ((RecipeListItem)adapter.getItem(position)).getCategory();
+        if (title != null){
+
+        }
+        else{
+            adapter.expandCategory(category);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     class RetreiveBitmapTask extends AsyncTask<String, Void, Void> {
 
         private Exception exception;
@@ -52,10 +67,13 @@ public class ShowRecipesActivity extends ListActivity{
                 Log.i("RecipeListItem.java", "this is url: " + urls[0]);
                 for (int i = 0; i < getListAdapter().getCount(); ++i){
                     RecipeListItem recipeListItem = (RecipeListItem) getListAdapter().getItem(i);
-                    String url = recipeListItem.getUrl();
-                    URL newurl = new URL(url);
-                    recipeListItem.setImage(resizeBitMap(BitmapFactory.decodeStream(newurl.openConnection().getInputStream())));
-                    Log.i("RecipeListItem.java", "Bitmap: " + recipeListItem.getImage().toString());
+                    if(recipeListItem.getUrl() != null){
+                        Log.i("RecipeListItem.java", "i: " + i);
+                        String url = recipeListItem.getUrl();
+                        URL newurl = new URL(url);
+                        recipeListItem.setImage(resizeBitMap(BitmapFactory.decodeStream(newurl.openConnection().getInputStream())));
+                        Log.i("RecipeListItem.java", "Bitmap: " + recipeListItem.getImage().toString());
+                    }
                 }
                 onPostExecute();
                 return null;

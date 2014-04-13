@@ -29,6 +29,15 @@ public class RecipeListItem {
     private ArrayList<String> ingredients;
     private ArrayList<String> instructions;
 
+    public RecipeListItem(String title){
+        this.url = null;
+        this.image = null;
+        this.title = null;
+        this.category = title;
+        this.description = null;
+        this.ingredients = null;
+        this.instructions = null;
+    }
     public RecipeListItem(String url, String title, String category, String description,
                           ArrayList<String> ingredients, ArrayList<String> instructions) throws IOException {
         this.image = null;
