@@ -8,5 +8,7 @@
     <string name="ingredients_header">Ingredients</string>
     <string name="directions_header">Directions</string>
     <string name="yummly_attr">Powered by Yummly</string>
+    <string name="app_id">e06bf811</string>
+    <string name="app_key">c845f81875e19e9ff3b97e1ec196d18e</string>
 
 </resources>

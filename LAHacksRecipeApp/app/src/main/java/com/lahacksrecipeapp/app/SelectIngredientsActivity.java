@@ -21,6 +21,7 @@ import java.util.ArrayList;
  */
 public class SelectIngredientsActivity extends ActionBarActivity {
     private ArrayList<String> items;
+    private DBHandler db;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -29,14 +30,23 @@ public class SelectIngredientsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_selectingredients);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        db = new DBHandler(this);
+
+        if ( db.getItemsCount() < 1){
+            db.addToPantry(new Item("Eggs" , "12"));
+            db.addToPantry(new Item("Flour" , "Huge ass bag"));
+        }
+        items = db.getAllItemNames();
+
         // initialize ingredients list
-        items = new ArrayList<String>();
+        //items = new ArrayList<String>();
 
         // TODO: Remove diagnostic entries, add placeholder entry ("Click to add item...")
-        items.add("Eggs");
-        items.add("Flour");
+        //items.add("Eggs");
+        //items.add("Flour");
         //items.add("Chocolate");
         /*for (int i = 0; i < 20; i++)
+
             items.add("Steak "+i);*/
 
         // initialize adapter with array
@@ -67,10 +77,18 @@ public class SelectIngredientsActivity extends ActionBarActivity {
                 alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // check for empty/whitespace string
-                        if (input.getText().toString().trim().length() == 0)
-                            items.remove(pos);
-                        else
-                            items.set(pos, input.getText().toString());
+                        if (input.getText().toString().trim().length() == 0){
+                            db.deleteItem(items.get(pos));
+                            //items.remove(pos);
+                        }
+                        else{
+                            db.addToPantry(new Item(input.getText().toString(),"a trillion"));
+                            //items.set(pos, input.getText().toString());
+                        }
+                        adapter.clear();
+                        items = db.getAllItemNames();
+                        adapter.addAll(items);
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -91,8 +109,8 @@ public class SelectIngredientsActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // generate API call
-                String app_id = "e06bf811";
-                String app_key = "c845f81875e19e9ff3b97e1ec196d18e";
+                String app_id = getString(R.string.app_id);
+                String app_key = getString(R.string.app_key);
                 String base = "http://api.yummly.com/v1/api/recipes?";
                 String auth = "_app_id=" + app_id + "&_app_key=" + app_key;
 
@@ -135,8 +153,15 @@ public class SelectIngredientsActivity extends ActionBarActivity {
             alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // check for empty/whitespace string
-                    if (input.getText().toString().trim().length() > 0)
-                        items.add(input.getText().toString());
+                    if (input.getText().toString().trim().length() > 0){
+                        //items.add(input.getText().toString());
+                        db.addToPantry(new Item(input.getText().toString(),"a trillion"));
+                    }
+                        //items.set(pos, input.getText().toString());
+                    adapter.clear();
+                    items = db.getAllItemNames();
+                    adapter.addAll(items);
+                    adapter.notifyDataSetChanged();
                 }
             });
 
