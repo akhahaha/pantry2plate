@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="#EEEEEE">
+
+	<TextView
+		android:id="@+id/separator_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Kale Chips Bitches!"
+		android:paddingLeft="30dp"
+		android:paddingTop="5dp"
+		android:paddingBottom="5dp"
+		android:background="#80ff762e"
+		android:shadowColor="#000000"
+		android:shadowDx="1"
+		android:shadowDy="1"
+		android:shadowRadius="1"
+		android:textSize="20dp"
+		android:gravity="left"
+		android:textColor="#444444"/>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Pantry 2 Plate</string>
+	<string name="app_descr">
+		Provides recipe suggestions using specified ingredients.</string>
+
+	<string name="action_settings">Settings</string>
+	<string name="action_add_ingredient">Add Ingredient</string>
+
+	<string name="header_ingredients">Ingredients</string>
+	<string name="header_directions">Directions</string>
+
+	<string name="yummly_attr">Powered by Yummly</string>
+	<string name="yummly_app_id">e06bf811</string>
+	<string name="yummly_app_key">c845f81875e19e9ff3b97e1ec196d18e</string>
+</resources>

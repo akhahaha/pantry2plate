@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Pantry2Plate" parent="@android:style/Theme.Holo.Light">
+		<item name="android:actionBarStyle">@style/P2PActionBar</item>
+	</style>
+
+	<style name="P2PActionBar"
+	       parent="@android:style/Widget.Holo.Light.ActionBar">
+		<item name="android:background">#fffed918</item>
+	</style>
+</resources>
