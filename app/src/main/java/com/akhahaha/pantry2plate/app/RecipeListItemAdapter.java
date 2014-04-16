@@ -1,4 +1,4 @@
-package com.akhahaha.pantry2plate;
+package com.akhahaha.pantry2plate.app;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.akhahaha.pantry2plate.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

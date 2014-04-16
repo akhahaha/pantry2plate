@@ -1,4 +1,4 @@
-package com.akhahaha.pantry2plate;
+package com.akhahaha.pantry2plate.app;
 
 import android.content.ContentValues;
 import android.content.Context;

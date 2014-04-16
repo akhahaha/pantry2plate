@@ -1,4 +1,4 @@
-package com.akhahaha.pantry2plate;
+package com.akhahaha.pantry2plate.app;
 
 /**
  * Ingredient data structure
