@@ -91,6 +91,7 @@ public class SelectIngredientsActivity extends Activity {
 						adapter.notifyDataSetChanged();
 					}
 				});
+
 				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						// canceled

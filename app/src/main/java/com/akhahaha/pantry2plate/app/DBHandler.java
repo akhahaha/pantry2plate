@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -95,7 +96,7 @@ public class DBHandler extends SQLiteOpenHelper {
 		return ingredientList;
 	}
 
-	//get all item names
+	// get all item names
 	public ArrayList<String> getAllItemNames() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		String selectQuery = "SELECT  * FROM " + TABLE_NAME;
@@ -113,14 +114,15 @@ public class DBHandler extends SQLiteOpenHelper {
 		return itemList;
 	}
 
-	public void updateItem(String n, Ingredient ingredient) {
+	public void updateItem(String name, Ingredient ingredient) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		String updateQuery = "UPDATE " + TABLE_NAME +
-				" SET name = '" + ingredient.getName() +
-				"', quantity = " + ingredient.getQuantity() +
-				", units = '" + ingredient.getUnits() +
-				"' WHERE name = '" + n + "';";
+		String updateQuery = "UPDATE " + TABLE_NAME
+				+ " SET name = '"+ ingredient.getName()
+				+ "', quantity = " + ingredient.getQuantity()
+				+ ", units = '" + ingredient.getUnits()
+				+ "' WHERE name = '" + name + "';";
 		Cursor cursor = db.rawQuery(updateQuery, null);
+		cursor.getCount(); // magic fix for updateItem
 	}
 
 	public void deleteItem(String name) {
