@@ -18,7 +18,7 @@ Features
 
 Platform(s)
 ---------------
- - Android (3.0+)
+ - Android (4.1+)
 
 Installation
 ---------------
